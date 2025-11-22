@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Select elements to animate
     const animatedElements = document.querySelectorAll('.card, .feature-item, .text-content, .image-content');
-    
+
     animatedElements.forEach(el => {
         el.style.opacity = '0';
         el.style.transform = 'translateY(30px)';
@@ -48,4 +48,25 @@ document.addEventListener('DOMContentLoaded', () => {
             navbar.style.boxShadow = 'none';
         }
     });
+
+    // Form handling
+    const contactForm = document.querySelector('.contact-form');
+    if (contactForm) {
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const inputs = contactForm.querySelectorAll('input');
+            const name = inputs[0].value;
+            const email = inputs[1].value;
+            const phone = inputs[2].value;
+
+            const subject = `New Waitlist Entry: ${name}`;
+            const body = `Name: ${name}%0D%0AEmail: ${email}%0D%0APhone: ${phone}`;
+
+            window.location.href = `mailto:chzukaa8@gmail.com?subject=${encodeURIComponent(subject)}&body=${body}`;
+
+            alert('Opening your email client to send the request...');
+            contactForm.reset();
+        });
+    }
 });
